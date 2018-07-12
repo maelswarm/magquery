@@ -10,7 +10,7 @@
 Use magsearch to browse, download, or stream magnet links.
 
 ```
-npm install magsearch -g
+npm install magquery
 ```
 
 Once you've selected a magnet link, you can stream it with peerflix.
@@ -23,4 +23,10 @@ Also, be sure you have electron installed globally.
 
 ```
 npm install electron -g
+```
+
+Launch magquery with...
+
+```
+electron .
 ```
