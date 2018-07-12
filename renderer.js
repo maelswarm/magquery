@@ -214,10 +214,10 @@ magsearch.launchPF = function(settings, callback) {
 
   if (blist === 'auto') {
     if (plat !== 'win32') {
-      list.push('--blocklist=/usr/local/lib/node_modules/magsearch/btlev1');
+      list.push('--blocklist=/usr/local/lib/node_modules/magquery/btlev1');
     } else {
       list.push(
-        '--blocklist=C:UsersAdministratorAppDataRoaming\npm\node_modulesmagsearch\btlev1'
+        '--blocklist=C:UsersAdministratorAppDataRoaming\npm\node_modulesmagquery\btlev1'
       );
     }
     tc++;
