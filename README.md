@@ -31,3 +31,7 @@ Launch magquery with...
 ```
 electron .
 ```
+
+## Browsing torrents over TOR
+
+When using the TOR feature -- be sure to have TOR running on port 9050.
