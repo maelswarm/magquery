@@ -4,11 +4,10 @@
 <p align="center"><img src="https://i.imgur.com/ylDscG4.png" /></p>
 
 ## Install ##
-![build alt](https://travis-ci.org/roecrew/magsearch.svg?branch=master)
 ![platform alt](https://img.shields.io/badge/platform-windows%20|%20linux%20|%20osx-blue.svg)
 
 
-Use magsearch to browse, download, or stream magnet links.
+Use magquery to browse, download, or stream magnet links.
 
 ```
 npm install magquery
