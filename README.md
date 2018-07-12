@@ -1,4 +1,4 @@
-<h1 align="center">magsearch</h1>
+<h1 align="center">magquery</h1>
 
 <p align="center"><strong>A low-key magnet-link cli</strong></p>
 <p align="center"><img src="https://i.imgur.com/ylDscG4.png" /></p>
