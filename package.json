@@ -1,0 +1,26 @@
+{
+  "name": "magquery",
+  "version": "0.14.0",
+  "description": "A low-key magnet-link cli",
+  "main": "main.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/roecrew/magquery.git"
+  },
+  "bin": {
+    "magquery": "electron ."
+  },
+  "keywords": [
+    "magnet",
+    "torrent",
+    "search"
+  ],
+  "author": "roecrew",
+  "license": "MIT",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "electron": "^2.0.4",
+    "request": "^2.87.0",
+    "socks5-http-client": "^1.0.4"
+  }
+}

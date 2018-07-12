@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Magsearch</title>
+  <style>
+    body {
+      background-color: #888;
+      background-image: url(./tpb_logo.svg);
+      background-repeat: no-repeat;
+      background-size: 50%;
+      background-position: center;
+      background-attachment: fixed;
+    }
+
+    input {
+      text-rendering: auto;
+      color: initial;
+      letter-spacing: normal;
+      word-spacing: normal;
+      text-transform: none;
+      text-indent: 0px;
+      text-shadow: none;
+      display: inline-block;
+      text-align: start;
+      margin: 0em;
+      font: 400 11px system-ui;
+    }
+
+    select {
+      font-size: 14px;
+      font-weight: 700;
+      padding: 5px 40px 5px 10px;
+      border: 2px solid #41444e;
+      border-radius: 4px;
+      background: #f7f7f7 url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMCAyMCI+ICAgIDxwYXRoIGQ9Ik0xMy40MTggNy44NTljLjI3MS0uMjY4LjcwOS0uMjY4Ljk3OCAwIC4yNy4yNjguMjcyLjcwMSAwIC45NjlsLTMuOTA4IDMuODNjLS4yNy4yNjgtLjcwNy4yNjgtLjk3OSAwbC0zLjkwOC0zLjgzYy0uMjctLjI2Ny0uMjctLjcwMSAwLS45NjkuMjcxLS4yNjguNzA5LS4yNjguOTc4IDBMMTAgMTFsMy40MTgtMy4xNDF6Ii8+PC9zdmc+) right 10px center no-repeat;
+      background-size: 20px;
+      -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .25);
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .25);
+      font-family: sans-serif;
+      color: #3b4151;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      cursor: pointer;
+    }
+
+    .btn {
+      -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .25);
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .25);
+      padding: 5px 10px 5px 10px;
+      border: 2px solid #41444e;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .content {
+      display: flex;
+      justify-content: center;
+      padding: 15px;
+    }
+
+    .query {
+      width: 300px;
+    }
+
+    .search {
+      background-color: white;
+      font-family: sans-serif;
+      color: #3b4151;
+      text-align: center;
+    }
+
+    .query,
+    .search,
+    .keyword,
+    .player,
+    .protocol {
+      margin: 0 10px;
+    }
+
+    .results {
+      font-size: 20px;
+      color: white;
+    }
+
+    .item {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .item-title {
+      width: 70%;
+    }
+
+    .item-seeders {
+      width: 10%;
+    }
+
+    .item-leechers {
+      width: 10%;
+    }
+
+    .item-play {
+      width: 10%;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="content">
+    <input class="query" placeholder="Search The Pirate Bay..."></input>
+    <select class="keyword">
+      <option value="all">All</option>
+      <option value="video">Video</option>
+      <option value="audio">Audio</option>
+      <option value="adult">Adult</option>
+      <option value="applications">Apps</option>
+    </select>
+    <div class="btn search">Search</div>
+    <select class="player">
+      <option value="--vlc">vlc</option>
+      <option value="--airplay">airplay</option>
+      <option value="--mplayer">mplayer</option>
+      <option value="--smplayer">smplayer</option>
+      <option value="--mpchc">mpchc</option>
+      <option value="--potplayer">potplayer</option>
+      <option value="--mpv">mpv</option>
+      <option value="--omx">omx</option>
+      <option value="--webplay">webplay</option>
+      <option value="--jack">jack</option>
+    </select>
+    <select class="protocol">
+      <option value="web">Web</option>
+      <option value="tor">Tor</option>
+    </select>
+  </div>
+
+  <div class="results"></div>
+
+  <script>
+    let magsearch = require('./renderer.js');
+
+    document.querySelector('.search').addEventListener('click', () => {
+
+      document.querySelector('.results').innerHTML = '';
+
+      let payload = {};
+      if (document.querySelector('.protocol').value === 'web') {
+        payload = { keyword: document.querySelector('.keyword').value, query: document.querySelector('.query').value, socks: { enabled: false }, page: 0 };
+      } else {
+        payload = { keyword: document.querySelector('.keyword').value, query: document.querySelector('.query').value, socks: { enabled: true, port: 9050 }, page: 0 }
+      }
+
+      magsearch.pbay(payload, (results) => {
+        console.log(results);
+        for (let i = 0; i < results.title.length; i++) {
+
+          let item = document.createElement('div');
+          item.className = 'item';
+
+          let title = document.createElement('div');
+          title.className = 'item-title';
+          title.innerHTML = results.title[i];
+          let magnet = document.createElement('div');
+          magnet.className = 'item-magnet';
+          magnet.innerHTML = results.mag[i];
+          magnet.style.display = 'none'
+          let seeders = document.createElement('div');
+          seeders.className = 'item-seeders';
+          seeders.innerHTML = results.seeders[i];
+          let leechers = document.createElement('div');
+          leechers.className = 'item-leechers';
+          leechers.innerHTML = results.leechers[i];
+          let play = document.createElement('div');
+          play.className = 'item-play';
+          play.innerHTML = 'Watch';
+
+          item.appendChild(title);
+          item.appendChild(magnet);
+          item.appendChild(seeders);
+          item.appendChild(leechers);
+          item.appendChild(play);
+
+          document.querySelector('.results').appendChild(item);
+
+          play.addEventListener('click', (item) => {
+            magsearch.launchPF({ magnet: play.parentNode.querySelector('.item-magnet').innerText, path: 'tmp', player: document.querySelector('.player').value }, () => {
+
+            });
+          });
+
+        };
+      });
+    });
+
+  </script>
+</body>
+
+</html>
