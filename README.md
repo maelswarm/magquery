@@ -32,6 +32,12 @@ Launch magquery with...
 electron .
 ```
 
+## Features
+
+Browse torrents over TOR.
+
+Auto blocklist.
+
 ## Browsing torrents over TOR
 
 When using the TOR feature -- be sure to have TOR running on port 9050.
