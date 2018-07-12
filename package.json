@@ -1,14 +1,11 @@
 {
   "name": "magquery",
-  "version": "0.14.0",
+  "version": "0.14.1",
   "description": "A low-key magnet-link cli",
   "main": "main.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/roecrew/magquery.git"
-  },
-  "bin": {
-    "magquery": "electron ."
   },
   "keywords": [
     "magnet",
